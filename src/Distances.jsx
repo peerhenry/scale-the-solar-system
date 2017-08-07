@@ -1,6 +1,5 @@
 import React from "react";
-import planet_indices from "./planet_indices";
-import planet_data from "./planet_data";
+import body_data from "./body_data";
 
 class Distances extends React.Component{
   constructor(props) {
@@ -18,8 +17,8 @@ class Distances extends React.Component{
       alert('Input must be a number, not: ' + (typeof nTs) );
     }
     else{
-      var index = planet_indices[chosenPlanet];
-      var newScale = nTs/(planet_data[index].distance);
+      var body = body_data.filter(e => e.name == chosenPlanet)[0];
+      var newScale = nTs/(body.distance);
       this.setState({
         scale: newScale
       });
@@ -41,9 +40,9 @@ class Distances extends React.Component{
           <span>
             <select className="target-setter" defaultValue="Earth" id="chosen-planet" onChange={this.calculateScale}>
               {
-                planet_data.map(r => 
-                  <option value={r.planet} key={r.planet}>
-                    {r.planet}
+                body_data.filter(b => b.type == "Planet").map(r => 
+                  <option value={r.name} key={r.name}>
+                    {r.name}
                   </option>
                 )
               }
@@ -60,13 +59,13 @@ class Distances extends React.Component{
                   <th>Planet</th>
                   <th>Distance to Sun (10^6 km)</th>
                   <th>Radius (km)</th>
-                  <th>Distance Scaled (m)</th>
+                  <th>Scaled Distance (m)</th>
                   <th>Scaled Radius (mm)</th>
                 </tr>
                 {
-                  planet_data.map(r => 
-                    <tr key={r.planet}>
-                      <td>{r.planet}</td>
+                  body_data.map(r => 
+                    <tr key={r.name}>
+                      <td>{r.name}</td>
                       <td>{r.distance}</td>
                       <td>{r.radius}</td>
                       <td>{ this.applyScaling(r.distance) }</td>

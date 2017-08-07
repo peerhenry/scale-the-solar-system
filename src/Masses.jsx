@@ -1,6 +1,6 @@
 import React from "react";
 import planet_indices from "./planet_indices";
-import planet_data from "./planet_data";
+import body_data from "./body_data";
 
 class Masses extends React.Component{
   constructor(props) {
@@ -18,8 +18,8 @@ class Masses extends React.Component{
       alert('Input must be a number, not: ' + (typeof nTs) );
     } 
     else{
-      var index = planet_indices[chosenPlanet];
-      var newScale = nTs/(planet_data[index].mass);
+      var body = body_data.filter(b => b.name == chosenPlanet)[0];
+      var newScale = nTs/(body.mass);
       this.setState({
         scale: newScale
       });
@@ -41,9 +41,9 @@ class Masses extends React.Component{
           <span>
             <select className="target-setter" defaultValue="Earth" id="mass-chosen-planet" onChange={this.calculateScale}>
               {
-                planet_data.map(r => 
-                  <option value={r.planet} key={r.planet}>
-                    {r.planet}
+                body_data.map(r => 
+                  <option value={r.name} key={r.name}>
+                    {r.name}
                   </option>
                 )
               }
@@ -60,9 +60,9 @@ class Masses extends React.Component{
                   <th>Scaled (kg)</th>
                 </tr>
                 {
-                  planet_data.map(r => 
-                    <tr key={r.planet}>
-                      <td>{ r.planet }</td>
+                  body_data.map(r => 
+                    <tr key={r.name}>
+                      <td>{ r.name }</td>
                       <td>{ r.mass }</td>
                       <td>{ this.applyScaling(r.mass) }</td>
                     </tr>
