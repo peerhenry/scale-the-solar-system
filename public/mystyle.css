@@ -1,0 +1,37 @@
+h1{
+  font-size: 250%;
+}
+
+h2{
+  font-size: 225%;
+}
+
+h3{
+  font-size: 200%;
+}
+
+h4{
+  font-size: 175%;
+}
+
+h5{
+  font-size: 150%;
+}
+
+h6{
+  font-size: 125%;
+}
+
+td, th{
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+html{
+  color: #333;
+  background: #eee;
+  font-size: 21px;
+}
